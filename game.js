@@ -60,28 +60,68 @@ const loose = "You Loose";
 const tie = "Tie"
 
 // create another function that has two properties to decide the winner
-pickWinner = (playerSelection , computerSelection) =>{
+pickWinner = (playerSelection , computerSelection) => {
 
     // compare computerSelection and playerSelection
     if (computerSelection == rock && playerSelection == paper){
-        return window.alert(`${win} Paper beats Rock`);
+        window.alert(`${win} Paper beats Rock`);
+        return win;
     } else if (computerSelection == rock && playerSelection == sciss){
-        return window.alert(`${loose} Rock beats Scissors`);
+        window.alert(`${loose} Rock beats Scissors`);
+        return loose;
     } else if (computerSelection == rock && playerSelection == rock){
-        return window.alert(`${tie} Rock and Rock are tie`);
+        window.alert(`${tie} Rock and Rock are tie`);
+        return tie;
     } else if (computerSelection == paper && playerSelection == rock){
-        return window.alert(`${loose} Paper beats Rock`);
+        window.alert(`${loose} Paper beats Rock`);
+        return loose;
     } else if (computerSelection == paper && playerSelection == paper){
-        return window.alert(`${tie} Paper and Paper are tie`);
+        window.alert(`${tie} Paper and Paper are tie`);
+        return tie;
     } else if ( computerSelection == paper && playerSelection == sciss){
-        return window.alert(`${win} Scissors beats Paper`);
+        window.alert(`${win} Scissors beats Paper`);
+        return win;
     } else if (computerSelection == sciss && playerSelection == rock){
-        return window.alert(`${win} Rock beats Scissors`);
+        window.alert(`${win} Rock beats Scissors`);
+        return win;
     } else if (computerSelection == sciss && playerSelection == paper){
-        return window.alert(`${loose} Scissors beats Paper`);
+        window.alert(`${loose} Scissors beats Paper`);
+        return loose;
     } else if (computerSelection == sciss && playerSelection == sciss){
-        return window.alert(`${tie} Scissors and Scissors are tie`)
+        window.alert(`${tie} Scissors and Scissors are tie`)
+        return tie;
     }
 }
-pickWinner(Choose(),getComputerChoice());
-// show the winner. 
+// create another function to play a specific number of rounds.
+game = (rounds) => {
+    // create two variables to keep track of scores
+    let computerScore = 0;
+    let playerScore = 0;
+    // loop throgh as how much "rounds" property is ,using for loop.
+    for (i = 0; i < rounds ; i++){  
+        //run "pickWinner()" each time and save it'value inside "winner" variable.
+        let winner = pickWinner(Choose(),getComputerChoice());
+        // check for the winner and add the score to winner's variable
+        if (winner == win){
+            playerScore++ ;
+            // show the score inside window alert
+            window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
+        } else if (winner == loose){
+            computerScore++ ;
+            // show the score inside window alert
+            window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
+        } else if (winner == tie) { 
+            // if its a tie "i" won't increase by one
+            i--
+            continue
+        }
+    }
+    // show the winner. 
+    if (playerScore > computerScore){
+        window.alert(`You Won The Match ${playerScore}-${computerScore}`)
+    } else if(computerScore > playerScore){
+        window.alert(`You Lost The Match ${playerScore}-${computerScore}`)
+    }
+}
+// run the game
+game(5)
