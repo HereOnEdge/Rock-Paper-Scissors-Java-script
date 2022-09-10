@@ -16,6 +16,13 @@ const start_btn = document.querySelector('.start');
 const ask = document.createElement('h2');
 const winner = document.createElement('p');
 const computerChoice = document.createElement("p")
+const scoreContain = document.querySelector(".score-contain")
+const uShownScore = document.querySelector(".userS")
+const cShownScore = document.querySelector(".computerS")
+const buttons = document.querySelectorAll(".button")
+let userScore = 0 ;
+let computerScore = 0 ;
+
 
 
 
@@ -36,39 +43,93 @@ start_btn.addEventListener('click', () => {
         buttonContainer.style = "display: flex";
         start_btn.style.display = "none";
         label.style.display = "none";
+        winner.style.display = "none";
+        computerChoice.style.display = "none";
+        ask.style.display = "block";
+        scoreContain.style.display = "none";
+        userScore = 0;
+        computerScore = 0;
     }
     
 })
-rock_btn.onclick = () => {
-    ask.style.display = "none";
-    userChoice = rock;
-    pickWinner(userChoice, getComputerChoice())
-};
-paper_btn.onclick = () => {
-    ask.style.display = "none";
-    userChoice = paper;
-    pickWinner(userChoice, getComputerChoice())
-};
-sciss_btn.onclick = () => {
-    ask.style.display = "none";
-    userChoice = sciss;
-    pickWinner(userChoice, getComputerChoice())
-};
 /* create a function that ask for a number
 between 1 to 3 as an input inside window prompt 
 */
-Choose = () => {
-    rock_btn.onclick = () => {
-        userChoice = rock;
-        pickWinner(userChoice, getComputerChoice())
-        console.log(userChoice)
-    };
-    paper_btn.onclick = () => userChoice = paper;
-    sciss_btn.onclick= () => userChoice = sciss;
-    // let userChoice = Number(window.prompt("chosse. 1 = rock, 2 = paper, 3 = scissors,"))
+
+// 
+
+// change "scoreContain" display to flex
+
+// set "uShownScore" textContent to "userScore"
+
+// set "cShownScore" textContent to "computerScore"
+
+
+
+// check the variable using switch statement
+
+// if its 'win' add one point to 'userScore' and update uShownScore
+
+// if its 'loose' add one point to "computerScore" and update cShownScore
+
+/* */
+
+
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        ask.style.display = "none";
+        computerChoice.style.display = "block";
+        winner.style.display = "block";
+        scoreContain.style.display = "flex";
+        uShownScore.textContent = `${userScore}`;
+        cShownScore.textContent = `${computerScore}`;
+        if(button == rock_btn){
+            userChoice = rock;
+        } else if(button == paper_btn){
+            userChoice == paper;
+        } else if(button == sciss_btn){
+            userChoice == sciss;
+        } // store the pickWinner() into a variable
+        let result = pickWinner(userChoice, getComputerChoice());
+        checker:
+        switch(result){
+            case win:
+                userScore++;
+                uShownScore.textContent = `${userScore}`;
+                uShownScore.style.color = "#03ad14";
+                cShownScore.style.color = "#ff9e01"
+                break checker;
+            case loose:
+                computerScore++;
+                cShownScore.textContent = `${computerScore}`;
+                cShownScore.style.color = "#ee2603";
+                uShownScore.style.color = "#ff9e01";
+                break checker;
+            case tie:
+                uShownScore.style.color = "#ff9e01";
+                cShownScore.style.color = "#ff9e01";
+                break checker;
+        }
+        if(userScore == Math.floor((bestOf.value / 2) + 1) || computerScore ==
+             Math.floor((bestOf.value / 2) + 1)){
+                buttonContainer.style.display = "none";
+                if(userScore > computerScore){
+                    winner.textContent = "Yay You Won The MATCH!";
+                    winner.style.color = "#03ad14";
+                    start_btn.style.display = "block";
+                    label.style.display = "block";
+                } else {
+                    winner.textContent = "Yup You Lost The MATCH To a Computer!";
+                    winner.style.color = "#ee2603";
+                    start_btn.style.display = "block";
+                    label.style.display = "block";
+                }
+                
     
-    return userChoice;
-}
+        }
+    })
+})
+
 
 // computer picks one item randomly
 
@@ -155,28 +216,34 @@ pickWinner = (playerSelection , computerSelection) => {
     }
 }
 // create another function to play a specific number of rounds.
-game = (rounds) => {
+game = (bestOf) => {
     // create two variables to keep track of scores
     let computerScore = 0;
     let playerScore = 0;
     // loop throgh as how much "rounds" property is ,using for loop.
-    for (i = 0; i < rounds ; i++){  
+    for (i = 0; i < bestOf ; i++){  
         //run "pickWinner()" each time and save it'value inside "winner" variable.
-        let winner = pickWinner(Choose(),getComputerChoice());
+        if (playerScore == Math.floor((bestOf / 2) + 1) || computerScore ==
+         Math.floor((bestOf / 2) + 1)){
+            break
+         } else {
+            let winner = pickWinner(Choose(),getComputerChoice())
         // check for the winner and add the score to winner's variable
-        if (winner == win){
-            playerScore++ ;
+            if (winner == win){
+                playerScore++ ;
             // show the score inside window alert
-            window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
-        } else if (winner == loose){
-            computerScore++ ;
+                window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
+            } else if (winner == loose){
+                computerScore++ ;
             // show the score inside window alert
-            window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
-        } else if (winner == tie) { 
+                window.alert(`Your Score: ${playerScore} | Computer Score: ${computerScore}`)
+            } else if (winner == tie) { 
             // if its a tie "i" won't increase by one
-            i--
-            continue
+                i--
+                continue
         }
+         }
+        
     }
     // show the winner. 
     if (playerScore > computerScore){
