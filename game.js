@@ -77,20 +77,25 @@ between 1 to 3 as an input inside window prompt
 
 buttons.forEach((button) => {
     button.addEventListener('click', () => {
+        switch(button.getAttribute("id")){
+            case "one":
+                userChoice = rock;
+                break;
+            case "two":
+                userChoice = paper;
+                break;
+            case "three":
+                userChoice = sciss;
+                break;
+        } // store the pickWinner() into a variable
+        let result = pickWinner(userChoice, getComputerChoice());
         ask.style.display = "none";
         computerChoice.style.display = "block";
         winner.style.display = "block";
         scoreContain.style.display = "flex";
         uShownScore.textContent = `${userScore}`;
         cShownScore.textContent = `${computerScore}`;
-        if(button == rock_btn){
-            userChoice = rock;
-        } else if(button == paper_btn){
-            userChoice == paper;
-        } else if(button == sciss_btn){
-            userChoice == sciss;
-        } // store the pickWinner() into a variable
-        let result = pickWinner(userChoice, getComputerChoice());
+        
         checker:
         switch(result){
             case win:
