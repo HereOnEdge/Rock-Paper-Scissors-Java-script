@@ -116,4 +116,6 @@ button {
     height: 5rem;
     background-color: #ff9e01;
     border-radius: 15px;
+    border: none;
+    text-align: center;
 }
