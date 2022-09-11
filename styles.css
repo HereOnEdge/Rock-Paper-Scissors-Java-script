@@ -55,7 +55,7 @@ label {
     border: 2px solid #ff9e01;
     border-radius: 3px;
     box-shadow: 0 0 30px 3px  #ff9e01;
-    touch-action: none;
+    font-size: 20px;
 }
 .score-contain {
     width: 100%;
