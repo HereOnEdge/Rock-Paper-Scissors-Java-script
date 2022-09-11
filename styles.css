@@ -54,7 +54,8 @@ label {
     background-color: #040453;
     border: 2px solid #ff9e01;
     border-radius: 3px;
-    box-shadow: 0 0 30px 3px  #ff9e01
+    box-shadow: 0 0 30px 3px  #ff9e01;
+    touch-action: none;
 }
 .score-contain {
     width: 100%;
